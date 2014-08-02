@@ -22,6 +22,7 @@ $colorMail:#216a00;
 $colorShareTxt:#d9dbe6;
 
 nav {
+  z-index: 10;
   width:20%;
   height:100%;
   left: 0%;
@@ -36,11 +37,11 @@ nav {
     left:-20%;
   }
   .openbutton {
-    width : 200px;
+    width : 50px;
     height: 50px;
     background : $colorBlack1;
     position: absolute ;
-    right: -200px;
+    right: -50px;
   }
   ul{
     list-style: none;
@@ -55,11 +56,20 @@ nav {
   }
 }
 
-div{
-  &.page1{
-    text-indent: 40%;
-    text :center;
-    visibility: hidden;
+.container{
+  width : 80%;
+  height :100%;
+  left: 20%;
+  position : fixed;
+  z-index: 0;
+  .page{
+    position : relative;
+    width: 100%;
+    text-align :center;
+    display: none;
+    &.show{
+      display: block;
+    }
   }
 }
 
