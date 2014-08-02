@@ -4,6 +4,9 @@ $(document).ready(function(){
 	console.log($(".openbutton"));
 	$(".openbutton").on("click",affichemenu);
 	$("li").on("click",changecolor);
+		$("li").on("click",affcihep1);
+
+
 })
 
 function affichemenu() {
@@ -23,5 +26,8 @@ function changecolor( event ) {
 	var color = $(event.currentTarget).attr("data-color");
 	$("body").css("background",color);
 }
+
+
+
 
 

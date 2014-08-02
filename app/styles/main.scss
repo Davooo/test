@@ -55,6 +55,15 @@ nav {
   }
 }
 
+div{
+  &.page1{
+    text-indent: 40%;
+    text :center;
+    visibility: hidden;
+  }
+}
+
+
 
 
 
