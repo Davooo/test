@@ -7,6 +7,27 @@ $(document).ready(function(){
 	$(".openbutton").on("click",affichemenu);
 	$("li").on("click",changecolor);
 	$("li").on("click",changepage);
+
+	$.ajax({
+		url: 'http://www.omdbapi.com/', // url de requete
+		type: 'GET', //type de requete
+		dataType: 'json', //foram de recup
+		data: {s: 'Star Wars'}, //parametre envoyer au serv
+	})
+	.done(function( movies) {	//succes
+		console.log("succes");
+		for (k in movies.Search){
+			console.log(movies.Search[k].Title);
+		}
+
+	})
+	.fail(function() { //error
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+
 })
 
 function affichemenu() {
@@ -33,3 +54,4 @@ function changepage ( event) {
 	pageid = $(event.currentTarget).attr("data-pageid");
 	$("div#"+pageid).addClass("show");
 }
+
