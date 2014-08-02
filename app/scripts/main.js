@@ -5,7 +5,7 @@ var pageid = null;
 $(document).ready(function(){
 	console.log($(".openbutton"));
 	$(".openbutton").on("click",affichemenu);
-	$("li").on("click",changecolor);
+	//$("li").on("click",changecolor);
 	$("li").on("click",changepage);
 
 	$.ajax({
@@ -17,8 +17,17 @@ $(document).ready(function(){
 	.done(function( movies) {	//succes
 		console.log("succes");
 		for (k in movies.Search){
-			console.log(movies.Search[k].Title);
+			$("#p1").append("<a href='#' data-id='"+movies.Search[k].imdbID+"'>"+movies.Search[k].Title+"</a>");
+			console.log(movies.Search[k]);
 		}
+		$("#p1 a").on("click", function(event) {
+			event.preventDefault();
+						console.log(event.currentTarget);
+
+			rendermovie ( $(event.currentTarget).attr("data-id")); //$(objet jquery)
+			/* Act on the event */
+		});
+
 
 	})
 	.fail(function() { //error
@@ -28,8 +37,48 @@ $(document).ready(function(){
 		console.log("complete");
 	});
 
+	$(".search").on("keyup",function(event) {
+		console.log(event.currentTarget.value);
+		SearchMovie(event.currentTarget.value);
+
+		/* Act on the event */
+	});
+
+
+
 })
 
+function SearchMovie (title){
+	$.ajax({
+		url: 'http://www.omdbapi.com/', // url de requete
+		type: 'GET', //type de requete
+		dataType: 'json', //foram de recup
+		data: {s: title }, //parametre envoyer au serv
+	})
+	.done(function( movies) {
+		console.log(movies);
+
+	});	
+}
+
+function rendermovie (id){
+	$.ajax({
+		url: 'http://www.omdbapi.com/', // url de requete
+		type: 'GET', //type de requete
+		dataType: 'json', //foram de recup
+		data: {i: id }, //parametre envoyer au serv
+	})
+	.done(function( movie) {
+		console.log(movie);
+		$("#p1 .title").html(movie.Title);
+		$("#p1 .resum").html(movie.Plot);
+		$("#p1 .poster").attr("src",movie.Poster);
+
+
+	});
+
+
+}
 function affichemenu() {
 	if ($("nav").hasClass("inactive")){
 		$("nav").removeClass("inactive");

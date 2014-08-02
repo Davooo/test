@@ -67,6 +67,9 @@ nav {
     width: 100%;
     text-align :center;
     display: none;
+    a{
+      display: block;
+    }
     &.show{
       display: block;
     }
